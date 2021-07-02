@@ -1,27 +1,45 @@
-# Script for Sending Emails
+# Script for Mail Automatization
 
-This script was made for de automatization of emails.
+This script was made for de automatization of e-mails.
+In the moment, this script only send simple messages e-mails.
+
+## Instructions:
+1. **Files organization:**
+    - **Login Data:**
+    Add your e-mail and password, in this order, on different lines.
+
+    - **e-Mails:**
+    Add one e-mail for line, without adicional spaces.
+
+    - **Message:**
+    Write the message in the way you want it to show.
 
 ## Functions:
 
-### sendEmail(yourEmail, yourPassword, toFile, title, messageFile):
+1. **sendEmail(loginFile, toFile, title, messageFile):**
+Recieve files with login data, e-mail adresses and the message to be send, as so the title of the message.
 
-- **yourEmail**:
+    - **loginFile**: File with the login data.
 
-- **yourPassaword**:
+    - **toFile**: File with the e-mail adresses.
 
-- **toFile**:
+    - **title**: Title of the message to be send.
 
-- **title**:
-
-- **messageFile**:
-
-
-### collectEmails(emailFile):
-
-- **emailFile**:
+    - **messageFile**: File with the message to be send.
 
 
-### takeMessage(messageFile):
+2. **collectEmails(emailFile):**
+Take the file with the e-mail adresses and **retorn a list**.
 
-- **messageFile**:
+    - **emailFile**: File with the e-mail adresses.
+
+
+3. **takeMessage(messageFile):**
+Take the file with the message to be send and **retorn a list with de content**.
+
+    - **messageFile**: File with the message to be send.
+
+4. **loginData(loginFile):**
+Take the file with login data and **retorn a list with the content**.
+
+    - **loginFile**: File with the login data.
