@@ -25,7 +25,7 @@ def sendEmail(loginFile, toFile, title, messageFile):
 
         for i in toList:
             msg['To'] = i
-            server.sendmail(msg['From'], i, msg.as_string())
+            server.sendmail(msg['From'], i, msg.as_string().encode('utf-8'))
 
         server.quit()
 
@@ -38,7 +38,7 @@ def collectEmails(emailFile):
     receiver = []
 
     try:
-        file = open(emailFile, 'r')
+        file = open(emailFile, 'r', encoding='utf-8')
 
         for email in file:
             email= email.strip('\n')
@@ -54,7 +54,7 @@ def takeMessage(messageFile):
     message = ''
 
     try:
-        file = open(messageFile, 'r')
+        file = open(messageFile, 'r', encoding='utf-8')
 
         for line in file:
             message += line
@@ -69,7 +69,7 @@ def loginData(loginFile):
     login = []
 
     try:
-        file = open(loginFile)
+        file = open(loginFile, 'r', encoding='utf-8')
         for line in file:
             line = line.strip('\n')
             login.append(line)
@@ -79,5 +79,26 @@ def loginData(loginFile):
         print('Erro ao ler o arquivo de LOGIN.')
     
 
+def readInput(inputFile):
+    inputData = []
+    
+    try:
+        file = open(inputFile, 'r', encoding='utf-8')
+        for line in file:
+            line = line.strip('\n')
+            inputData.append(line)
+        file.close()
+        if len(inputData) == 4:
+            return inputData
+        else:
+            print('Erro ao ler o arquivo de INPUT. Quantidade de dados incorreta no arquivo.')
+            return None
+    except:
+        print('Erro ao ler o arquivo de INPUT.')
+        return None
 
-sendEmail('login/dadosDeLogin.txt', 'listasDeEmail/testeEmails.txt', 'Oi mamiz, Como vai?', 'mensagensDeEmail/testeMensagem.txt')
+
+inputFile = input('Digite o nome do arquivo de inputs: ')
+inputData = readInput(inputFile)
+
+sendEmail(inputData[0], inputData[1], inputData[2], inputData[3])
