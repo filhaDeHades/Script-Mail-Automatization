@@ -98,7 +98,7 @@ def readInput(inputFile):
         return None
 
 
-inputFile = input('Digite o nome do arquivo de inputs: ')
+inputFile = input('Digite o caminho para o arquivo de inputs: ')
 inputData = readInput(inputFile)
 
 sendEmail(inputData[0], inputData[1], inputData[2], inputData[3])
