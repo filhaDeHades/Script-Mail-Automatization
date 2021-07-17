@@ -7,8 +7,8 @@ import smtplib
 from unidecode import unidecode
 
 def sendEmail(loginFile, toFile, title, messageFile):
-    loginList = loginData(loginFile)
-    toList = collectEmails(toFile)
+    loginList = collectData(loginFile, 0)
+    toList = collectData(toFile, 1)
     message = takeMessage(messageFile)
 
     try:
@@ -147,22 +147,6 @@ def collectData(dataFile, dataType, prefix='', sufix=''):
         close(1)
 
 
-def collectEmails(emailFile):
-    receiver = []
-
-    try:
-        file = open(emailFile, 'r', encoding='utf-8')
-
-        for email in file:
-            email= email.strip('\n')
-            receiver.append(email)
-
-        file.close()
-        return receiver
-    except:
-        print('Erro ao ler o arquivo de EMAILS.')
-    
-
 def takeMessage(messageFile):
     message = ''
 
@@ -177,20 +161,6 @@ def takeMessage(messageFile):
     except:
         print('Erro ao ler o arquivo de MENSAGEM.')
 
-
-def loginData(loginFile):
-    login = []
-
-    try:
-        file = open(loginFile, 'r', encoding='utf-8')
-        for line in file:
-            line = line.strip('\n')
-            login.append(line)
-        file.close()
-        return login
-    except:
-        print('Erro ao ler o arquivo de LOGIN.')
-    
 
 def readInput(inputFile):
     inputData = []
