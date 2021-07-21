@@ -39,7 +39,7 @@ def sendEmail(loginFile, toFile, title, messageFile):
     
 
 def sendEmailWithAttachments(loginFile, to, title, message, attachFileName):
-    loginList = loginData(loginFile)
+    loginList = collectData(loginFile, 0)
 
     try:
         # logFile = open('log-envio-de-emails.txt', 'a', encoding='utf-8')
@@ -80,7 +80,7 @@ def sendEmailWithAttachments(loginFile, to, title, message, attachFileName):
         server.login(msg['From'], loginList[1])
 
         msg['To'] = to
-        #server.sendmail(msg['From'], msg['To'], msg.as_string().encode('utf-8'))
+        server.sendmail(msg['From'], msg['To'], msg.as_string().encode('utf-8'))
 
         server.quit()
 
