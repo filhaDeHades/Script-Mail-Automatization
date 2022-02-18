@@ -9,14 +9,14 @@ Atualmente o script envia envia emails de mensagens simples e com anexos do tipo
     - **Dados de Login:**
     Adicione o email do qual a mensagem deve ser enviada e a senha desse mesmo email, respectivamente, em linhas diferentes.
 
-    - **Emails:**
+    - **Emails de Destino:**
     Adicione um email por linha sem espaços adicionais.
 
     - **Mensagem:**
     Escreva a mensagem da forma como você espera que ela seja apresentada.
 
     - **Arquivos:**
-    Arquivos que serão enviados pelos emails. (no momento só arquivos PDF)
+    Arquivos que serão enviados pelos emails. (no momento só arquivos PDF).
 
 ## Funções:
 

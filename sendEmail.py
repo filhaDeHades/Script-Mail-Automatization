@@ -1,3 +1,4 @@
+from email.message import EmailMessage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
@@ -36,7 +37,43 @@ def sendEmail(loginFile, toFile, title, messageFile):
         print("successfully sent email")
     except:
         print("Erro ao ENVIAR o email.")
+
+
+def sendHTMLEmail(loginFile, to, title, message, htmlFile):
     
+    loginList = collectData(loginFile, 0)
+    toList = collectData(to, 1)
+    message = takeMessage(message)
+    html = takeMessage(htmlFile)
+
+    try:
+        msg = EmailMessage()
+
+        msg['From'] = loginList[0]
+        msg['Subject'] = title
+
+        msg.attach(MIMEText(message, 'plain', 'utf-8'))
+        msg.set_content(message)
+        msg.add_alternative(html, subtype='html')
+
+        server = smtplib.SMTP('smtp.gmail.com: 587')
+        server.ehlo()
+        server.starttls()
+        server.ehlo()
+
+
+        server.login(msg['From'], loginList[1])
+
+        for i in toList:
+            msg['To'] = i
+            server.send_message(msg)
+
+        server.quit()
+
+        print("successfully sent HTML email")
+    except:
+        print("Erro ao ENVIAR o email HTML.")
+
 
 def sendEmailWithAttachments(loginFile, to, title, message, attachFileName):
     loginList = collectData(loginFile, 0)
@@ -171,7 +208,7 @@ def readInput(inputFile):
             line = line.strip('\n')
             inputData.append(line)
         file.close()
-        if len(inputData) == 4 or len(inputData) == 6:
+        if len(inputData) >= 4 and len(inputData) <= 6:
             return inputData
         else:
             print('Erro ao ler o arquivo de INPUT. Quantidade de dados incorreta no arquivo.')
@@ -186,5 +223,7 @@ inputData = readInput(inputFile)
 
 if len(inputData) == 4:
     sendEmail(inputData[0], inputData[1], inputData[2], inputData[3])
+elif len(inputData) == 5:
+    sendHTMLEmail(inputData[0], inputData[1], inputData[2], inputData[3], inputData[4])
 elif len(inputData) == 6:
     sendManyEmails(inputData[0], inputData[1], inputData[2], inputData[3], inputData[4], inputData[5])

@@ -1,8 +1,10 @@
 input.txt
 .vs
+\inputs
 \listasDeEmail
 \mensagensDeEmail
 \login
 \nomes
 \certificados
 log-envio-de-emails.txt
+index.html
