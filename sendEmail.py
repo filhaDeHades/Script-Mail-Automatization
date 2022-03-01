@@ -47,30 +47,31 @@ def sendHTMLEmail(loginFile, to, title, message, htmlFile):
     html = takeMessage(htmlFile)
 
     try:
-        msg = EmailMessage()
-
-        msg['From'] = loginList[0]
-        msg['Subject'] = title
-
-        msg.attach(MIMEText(message, 'plain', 'utf-8'))
-        msg.set_content(message)
-        msg.add_alternative(html, subtype='html')
-
-        server = smtplib.SMTP('smtp.gmail.com: 587')
-        server.ehlo()
-        server.starttls()
-        server.ehlo()
-
-
-        server.login(msg['From'], loginList[1])
-
         for i in toList:
+            msg = EmailMessage()
+
+            msg['From'] = loginList[0]
+            msg['Subject'] = title
+
+            msg.attach(MIMEText(message, 'plain', 'utf-8'))
+            msg.set_content(message)
+            msg.add_alternative(html, subtype='html')
+
+            server = smtplib.SMTP('smtp.gmail.com: 587')
+            server.ehlo()
+            server.starttls()
+            server.ehlo()
+
+
+            server.login(msg['From'], loginList[1])
+
+        
             msg['To'] = i
             server.send_message(msg)
 
-        server.quit()
+            server.quit()
 
-        print("successfully sent HTML email")
+            print("successfully sent HTML email")
     except:
         print("Erro ao ENVIAR o email HTML.")
 
@@ -218,12 +219,14 @@ def readInput(inputFile):
         return None
 
 
-inputFile = input('Digite o caminho para o arquivo de inputs: ')
-inputData = readInput(inputFile)
+if __name__ == "__main__":
 
-if len(inputData) == 4:
-    sendEmail(inputData[0], inputData[1], inputData[2], inputData[3])
-elif len(inputData) == 5:
-    sendHTMLEmail(inputData[0], inputData[1], inputData[2], inputData[3], inputData[4])
-elif len(inputData) == 6:
-    sendManyEmails(inputData[0], inputData[1], inputData[2], inputData[3], inputData[4], inputData[5])
+    inputFile = input('Digite o caminho para o arquivo de inputs: ')
+    inputData = readInput(inputFile)
+
+    if len(inputData) == 4:
+        sendEmail(inputData[0], inputData[1], inputData[2], inputData[3])
+    elif len(inputData) == 5:
+        sendHTMLEmail(inputData[0], inputData[1], inputData[2], inputData[3], inputData[4])
+    elif len(inputData) == 6:
+        sendManyEmails(inputData[0], inputData[1], inputData[2], inputData[3], inputData[4], inputData[5])
