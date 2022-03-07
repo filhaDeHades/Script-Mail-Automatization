@@ -40,6 +40,15 @@ def sendEmail(loginFile, toFile, title, messageFile):
 
 
 def sendHTMLEmail(loginFile, to, title, message, htmlFile):
+    """Send HTML Emails to the adresses on the 'to' file.
+
+    Args:
+        loginFile (str): Name of the file with the login data.
+        to (str): Name of the file contain the list of receivers for the email.
+        title (str): Title of the email.
+        message (str): Name of the file contain the simples text message for the body of the email.
+        htmlFile (str): Name of the HTML file contain the stylized message for the body of the email.
+    """
     
     loginList = collectData(loginFile, 0)
     toList = collectData(to, 1)
@@ -153,10 +162,20 @@ def sendManyEmails(loginFile, toFile, title, messageFile, namesFile, attachFile)
         print('ERRO. Falha ao enviar muitos emails.')
 
 
-    pass
-
 
 def collectData(dataFile, dataType, prefix='', sufix=''):
+    """Collect the data from one of the input files.
+
+    Args:
+        dataFile (str): Name of the file scanned.
+        dataType (int): Indicates what type of input file it is.
+        prefix (str, optional): Used for attachment files. Defaults to ''.
+        sufix (str, optional): Used for attachment files. Defaults to ''.
+
+    Returns:
+        _type_: _description_
+    """
+
     dataList = []
 
     try:
@@ -221,7 +240,8 @@ def readInput(inputFile):
 
 if __name__ == "__main__":
 
-    inputFile = input('Digite o caminho para o arquivo de inputs: ')
+    #inputFile = input('Digite o caminho para o arquivo de inputs: ')
+    inputFile = "inputs/inputs.txt"
     inputData = readInput(inputFile)
 
     if len(inputData) == 4:

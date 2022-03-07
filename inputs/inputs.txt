@@ -1,0 +1,5 @@
+inputs/sender.txt
+inputs/receiver.txt
+Título do Email
+inputs/message.txt
+inputs/index.html
